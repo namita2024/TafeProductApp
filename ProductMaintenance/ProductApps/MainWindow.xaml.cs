@@ -38,6 +38,9 @@ namespace ProductApps
                     // Adding delivery charge
                     double totalPaymentWithCharge = totalPayment + 25;
                     totalChargeTextBox.Text = totalPaymentWithCharge.ToString();
+
+                    double totalPaymentWithWrapCharge = totalPaymentWithCharge + 5;
+                    totalWrapTextBox.Text = totalPaymentWithWrapCharge.ToString();
                 }
                 else
                 {
@@ -58,6 +61,7 @@ namespace ProductApps
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
             totalChargeTextBox.Text = "";
+            totalWrapTextBox.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
