@@ -41,6 +41,9 @@ namespace ProductApps
 
                     double totalPaymentWithWrapCharge = totalPaymentWithCharge + 5;
                     totalWrapTextBox.Text = totalPaymentWithWrapCharge.ToString();
+
+                    double totalPaymentWithGST = totalPaymentWithWrapCharge * 1.1;
+                    totalGSTTextBox.Text = totalPaymentWithGST.ToString();
                 }
                 else
                 {
@@ -62,6 +65,7 @@ namespace ProductApps
             totalPaymentTextBlock.Text = "";
             totalChargeTextBox.Text = "";
             totalWrapTextBox.Text = "";
+            totalGSTTextBox.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
