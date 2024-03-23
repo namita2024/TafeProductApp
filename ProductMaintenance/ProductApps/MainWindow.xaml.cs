@@ -20,8 +20,6 @@ namespace ProductApps
     /// </summary>
     public partial class MainWindow : Window
     {
-        Product cProduct;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -31,26 +29,40 @@ namespace ProductApps
         {
             try
             {
-                cProduct = new Product(Convert.ToDecimal(priceTextBox.Text), Convert.ToInt16(quantityTextBox.Text));
-                cProduct.calTotalPayment();
-                totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
+                // Calculate total payment
+                if (double.TryParse(priceTextBox.Text, out double price) &&
+                    int.TryParse(quantityTextBox.Text, out int quantity))
+                {
+                    double totalPayment = price * quantity;
+                    totalPaymentTextBlock.Text = totalPayment.ToString();
+                    // Adding delivery charge
+                    double totalPaymentWithCharge = totalPayment + 25;
+                    totalChargeTextBox.Text = totalPaymentWithCharge.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter valid price and quantity.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-            catch (FormatException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Enter data again", "Data Entry Error");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void clearButton_Click(object sender, RoutedEventArgs e)
         {
+            // Clear all textboxes
             productTextBox.Text = "";
             priceTextBox.Text = "";
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
+            totalChargeTextBox.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
+            // Close the window
             this.Close();
         }
     }
